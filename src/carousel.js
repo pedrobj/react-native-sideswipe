@@ -43,6 +43,7 @@ export default class SideSwipe extends Component<CarouselProps, State> {
     shouldRelease: () => false,
     threshold: 0,
     useNativeDriver: true,
+    speedSwipe: false,
   };
 
   constructor(props: CarouselProps) {
@@ -191,8 +192,9 @@ export default class SideSwipe extends Component<CarouselProps, State> {
     );
 
     const absoluteVelocity: number = Math.round(Math.abs(vx));
-    const velocityDifference: number =
-      absoluteVelocity < 1 ? 0 : absoluteVelocity - 1;
+    const velocityDifference: number = this.props.speedSwipe
+      ? absoluteVelocity < 1 ? 0 : absoluteVelocity - 1
+      : 0;
 
     const newIndex: number =
       dx > 0
